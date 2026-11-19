@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLS · Anteprima app mobile del medico</title>
+<link rel="icon" type="image/png" href="assets/favicon-cls.png">
+<style>
+  :root{
+    --accent:#ea8b2f; --accent-ink:#9c4f0c; --bg:#f4efe7; --surface:#fffdfa;
+    --border:#e7ded2; --fg:#2f2d2b; --muted:#7a746c; --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);font-family:var(--font)}
+  body{background:
+    radial-gradient(900px 500px at 80% -10%,rgba(234,139,47,.16),transparent 60%),
+    radial-gradient(700px 400px at 0% 100%,rgba(87,87,86,.10),transparent 55%),
+    var(--bg)}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 22px;background:rgba(255,253,250,.9);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;backdrop-filter:blur(10px)}
+  .brand{display:flex;align-items:center;gap:10px;min-width:0}
+  .brand img{height:36px;width:auto;display:block}
+  .brand b{display:block;font-size:14px;line-height:1.2}
+  .brand span{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+  .tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .tools button{min-height:34px;padding:0 12px;border:1px solid var(--border);background:var(--surface);color:var(--fg);border-radius:8px;font:inherit;font-size:12px;cursor:pointer}
+  .tools button:hover{border-color:var(--accent);color:var(--accent-ink)}
+  .tools button.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .tools .tool-link{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border:1px solid var(--border);background:var(--surface);color:var(--fg);border-radius:8px;font-size:12px;text-decoration:none}
+  .tools .tool-link:hover{border-color:var(--accent);color:var(--accent-ink)}
+  .tools .sep{width:1px;height:22px;background:var(--border);margin:0 4px}
+  .stage{display:flex;align-items:flex-start;justify-content:center;gap:48px;padding:34px 22px 60px;min-height:calc(100vh - 65px)}
+  .device{width:414px;height:868px;flex:none;background:#1c1a19;border-radius:54px;padding:12px;box-shadow:0 30px 70px rgba(45,38,30,.28),inset 0 0 0 1px rgba(255,255,255,.08);position:relative}
+  .device:before{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:#3a3735;box-shadow:0 0 0 3px #242120;z-index:2}
+  .screen{width:390px;height:844px;display:flex;flex-direction:column;background:#f4efe7;border-radius:42px;overflow:hidden}
+  .screen iframe{flex:1;width:100%;height:auto;min-height:0;display:block;border:0;background:#f4efe7}
+  .browser-top{flex:none;height:82px;padding:6px 10px;background:#f7f5f2;border-bottom:1px solid #d8d1c6;display:flex;flex-direction:column;justify-content:center;gap:5px;font-family:var(--font)}
+  .b-status{display:flex;justify-content:space-between;align-items:center;font-size:9px;font-weight:700;color:#4a4744;height:13px;padding:0 2px}
+  .b-status .right{letter-spacing:1px}
+  .b-url{display:flex;align-items:center;gap:7px;height:34px;padding:0 9px;background:#e9e4dc;border-radius:10px;font-size:10.5px;color:#3b3835}
+  .b-url .lock{width:11px;height:13px;border:1.5px solid #6f6a63;border-radius:2px;position:relative;flex:none;margin-top:2px}
+  .b-url .lock:before{content:"";position:absolute;left:1px;top:-5px;width:6px;height:6px;border:1.5px solid #6f6a63;border-bottom:0;border-radius:5px 5px 0 0}
+  .b-url .addr{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .b-url .more{font-size:14px;color:#6f6a63;letter-spacing:1px}
+  .browser-bottom{flex:none;height:44px;background:#f7f5f2;border-top:1px solid #d8d1c6;display:flex;align-items:center;justify-content:space-around;color:#57524b;font-size:17px;font-family:var(--font)}
+  .browser-bottom span{width:34px;text-align:center}
+  .screen.no-browser .browser-top,.screen.no-browser .browser-bottom{display:none}
+  .device.tablet{width:1052px;height:796px;padding:14px;border-radius:34px}
+  .device.tablet:before{top:22px}
+  .device.tablet .screen{width:1024px;height:768px;border-radius:22px}
+  body.device-tablet .aside{display:none}
+  .aside{max-width:300px;padding-top:26px}
+  .aside .kicker{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-ink);font-weight:700}
+  .aside h1{font-size:24px;line-height:1.15;margin:8px 0 10px}
+  .aside p{font-size:12.5px;line-height:1.6;color:var(--muted);margin:0 0 14px}
+  .aside ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+  .aside li{font-size:12px;line-height:1.45;color:var(--fg);display:flex;gap:8px;align-items:flex-start}
+  .aside li:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:5px;flex:none}
+  .aside .note{margin-top:18px;padding:10px 12px;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;background:var(--surface);font-size:11px;color:var(--muted);line-height:1.5}
+  .aside .cred{margin-top:14px;font-size:11px;color:var(--muted)}
+  .aside .cred code{font-family:ui-monospace,Consolas,monospace;color:var(--fg);background:var(--surface);border:1px solid var(--border);padding:1px 5px;border-radius:4px}
+  .exit-full{display:none;position:fixed;top:14px;right:14px;z-index:80;border:1px solid rgba(255,255,255,.25);background:rgba(30,28,26,.82);color:#fff;border-radius:8px;padding:9px 13px;font:600 12px var(--font);cursor:pointer;backdrop-filter:blur(8px)}
+  body.full{background:#e7dfd5}
+  body.full .top,body.full .aside{display:none}
+  body.full .stage{padding:0;min-height:100dvh;display:flex;align-items:center;justify-content:center}
+  body.full .device{width:414px;height:868px;padding:12px;border-radius:54px;transform:scale(var(--full-scale,1));transform-origin:center;margin:0;background:#1c1a19;box-shadow:0 30px 70px rgba(45,38,30,.34)}
+  body.full .device.tablet{width:1052px;height:796px;padding:14px;border-radius:34px}
+  body.full .browser-top,body.full .browser-bottom{display:none}
+  body.full .exit-full{display:block}
+  @media (max-height:980px){
+    .stage{padding-top:20px}
+    .device{transform:scale(.86);transform-origin:top center;margin-bottom:-120px}
+    .aside{padding-top:0}
+  }
+  @media (max-width:1050px){.aside{display:none}}
+  @media (max-width:600px){
+    .top{padding:10px 12px;flex-direction:column;align-items:flex-start;gap:8px}
+    .tools{width:100%;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px}
+    .tools button{flex:none}
+    .stage{padding:12px 0 0;min-height:0}
+    .device{width:100%;max-width:430px;height:calc(100dvh - 120px);border-radius:0;padding:0;box-shadow:none;transform:none;margin:0}
+    .device:before{display:none}
+    .screen{width:100%;height:100%;border-radius:0}
+    .screen iframe{width:100%;height:auto;border-radius:0}
+    body.full .device{width:100%;height:100dvh;padding:0;border-radius:0;transform:none;background:var(--bg);box-shadow:none}
+    body.full .screen{width:100%;height:100%;border-radius:0}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <img src="assets/favicon-cls.png" alt="CLS Salus">
+    <div><b>CLS Salus · Anteprima mobile</b><span>App del medico competente · demo interattiva</span></div>
+  </div>
+  <div class="tools">
+    <button type="button" class="on" data-goto="#/dashboard">Oggi</button>
+    <button type="button" data-goto="#/agenda">Agenda</button>
+    <button type="button" data-goto="#/lavoratori">Pazienti</button>
+    <button type="button" data-goto="#/esami">Referti</button>
+    <button type="button" data-goto="#/consuntivo">Consuntivo</button>
+    <button type="button" id="device">Tablet</button>
+    <button type="button" id="browser" class="on" aria-pressed="true">Browser: sì</button>
+    <button type="button" id="full">A tutto schermo</button>
+    <a class="tool-link" href="index.html?demo=medico" target="_blank" rel="noopener">Gestionale</a>
+    <span class="sep" aria-hidden="true"></span>
+    <button type="button" id="reload">Ricarica</button>
+  </div>
+</header>
+<main class="stage">
+  <div class="device">
+    <div class="screen" id="screen">
+      <div class="browser-top" aria-hidden="true">
+        <div class="b-status"><span>9:41</span><span class="right">5G&nbsp; ▰&nbsp; 100%</span></div>
+        <div class="b-url"><span class="lock"></span><span class="addr">app.clsalus.it/medico</span><span class="more">⋯</span></div>
+      </div>
+      <iframe id="phone" src="index.html?demo=medico#/dashboard" title="App mobile CLS per il medico competente"></iframe>
+      <div class="browser-bottom" aria-hidden="true"><span>‹</span><span>›</span><span>⌂</span><span>≡</span></div>
+    </div>
+  </div>
+  <aside class="aside">
+    <div class="kicker">Presentazione al cliente</div>
+    <h1>Il medico, in mobilità.</h1>
+    <p>Questa è l’app mobile del medico competente: agenda, pazienti, referti e consuntivo nella stessa base dati del gestionale. Usa i tab in basso dentro il telefono.</p>
+    <ul>
+      <li>Oggi: attività, referti da verificare e prossime visite.</li>
+      <li>Agenda: giorni, filtri sede/esterni e blocchi presso il cliente.</li>
+      <li>Pazienti: ricerca, visite, giudizi, referti e documenti.</li>
+      <li>Consuntivo: compensi a prestazione e download del riepilogo.</li>
+    </ul>
+    <div class="note">Dati di esempio in memoria. I PDF e gli invii sono simulati. Accesso demo automatico come medico competente.</div>
+    <div class="cred">Credenziali: <code>m.mineo</code> / <code>medico2026</code></div>
+    <div class="cred" style="margin-top:8px"><b>Browser:</b> il toggle mostra o nasconde la barra del browser per vedere l’ingombro reale. Senza browser è la modalità PWA installata.</div>
+  </aside>
+</main>
+<button class="exit-full" type="button" id="exit-full">Esci da tutto schermo</button>
+<script>
+  (function () {
+    if (window.matchMedia('(max-width: 600px)').matches && !/[?&]frame=1/.test(location.search)) {
+      location.replace('index.html?demo=medico#/dashboard');
+      return;
+    }
+    var phone = document.getElementById('phone');
+    var screenEl = document.getElementById('screen');
+    var browserBtn = document.getElementById('browser');
+    var deviceEl = document.querySelector('.device');
+    var deviceBtn = document.getElementById('device');
+    var tablet = false;
+    var base = 'index.html?demo=medico';
+    function setDevice(next) {
+      tablet = next === 'tablet';
+      deviceEl.classList.toggle('tablet', tablet);
+      document.body.classList.toggle('device-tablet', tablet);
+      deviceBtn.textContent = tablet ? 'Telefono' : 'Tablet';
+      deviceBtn.setAttribute('aria-label', tablet ? 'Passa alla vista telefono' : 'Passa alla vista tablet');
+      if (document.body.classList.contains('full')) setFull(true);
+    }
+    deviceBtn.addEventListener('click', function () { setDevice(tablet ? 'phone' : 'tablet'); });
+    function setBrowser(on) {
+      screenEl.classList.toggle('no-browser', !on);
+      browserBtn.classList.toggle('on', on);
+      browserBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      browserBtn.textContent = on ? 'Browser: sì' : 'Browser: no';
+    }
+    browserBtn.addEventListener('click', function () { setBrowser(screenEl.classList.contains('no-browser')); });
+    var buttons = document.querySelectorAll('[data-goto]');
+    function go(btn) {
+      buttons.forEach(function (b) { b.classList.toggle('on', b === btn); });
+      phone.src = base + btn.dataset.goto;
+    }
+    buttons.forEach(function (b) { b.addEventListener('click', function () { go(b); }); });
+    document.getElementById('reload').addEventListener('click', function () { phone.src = phone.src; });
+
+    function setFull(on) {
+      document.body.classList.toggle('full', on);
+      if (on) {
+        var h = deviceEl.offsetHeight || 868;
+        var s = Math.min(1.15, (window.innerHeight - 20) / h);
+        document.documentElement.style.setProperty('--full-scale', String(Math.max(0.45, s)));
+      }
+    }
+    document.getElementById('full').addEventListener('click', function () {
+      setFull(true);
+      var el = document.documentElement;
+      if (el.requestFullscreen) el.requestFullscreen().catch(function () { });
+    });
+    document.getElementById('exit-full').addEventListener('click', function () {
+      setFull(false);
+      if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+    });
+    document.addEventListener('fullscreenchange', function () {
+      if (!document.fullscreenElement) setFull(false);
+    });
+  })();
+</script>
+</body>
+</html>

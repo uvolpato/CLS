@@ -1,0 +1,23 @@
+{
+  "name": "CLS Salus · Gestione sorveglianza sanitaria",
+  "short_name": "CLS Medico",
+  "description": "Agenda, pazienti, referti e consuntivo del medico competente CLS.",
+  "start_url": "./index.html?demo=medico",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#f4efe7",
+  "theme_color": "#ea8b2f",
+  "lang": "it",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Agenda", "short_name": "Agenda", "url": "./index.html?demo=medico#/agenda", "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Pazienti", "short_name": "Pazienti", "url": "./index.html?demo=medico#/lavoratori", "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Consuntivo", "short_name": "Consuntivo", "url": "./index.html?demo=medico#/consuntivo", "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

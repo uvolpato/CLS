@@ -1,0 +1,80 @@
+{
+  "assets/app.js": {
+    "mtime": 1794348318.4554386,
+    "seen": 1794350919.2122877,
+    "ast_hash": "34d2d2bc10b353a8652568920233f0eb",
+    "semantic_hash": "34d2d2bc10b353a8652568920233f0eb"
+  },
+  "assets/componenti.js": {
+    "mtime": 1794340852.5566776,
+    "seen": 1794350919.2122946,
+    "ast_hash": "ea8fe7efa6be324240f344a89c38b947",
+    "semantic_hash": "ea8fe7efa6be324240f344a89c38b947"
+  },
+  "assets/dati.js": {
+    "mtime": 1794346366.504807,
+    "seen": 1794350919.2122977,
+    "ast_hash": "b8d63e0c5d5f1d6c7db6afaede5d72a3",
+    "semantic_hash": "b8d63e0c5d5f1d6c7db6afaede5d72a3"
+  },
+  "assets/mobile.js": {
+    "mtime": 1794350664.194753,
+    "seen": 1794350919.2122996,
+    "ast_hash": "7f91197b56c32b90ea41dd69df7375a1",
+    "semantic_hash": "7f91197b56c32b90ea41dd69df7375a1"
+  },
+  "assets/viste-agenda.js": {
+    "mtime": 1794350253.8905847,
+    "seen": 1794350919.2123013,
+    "ast_hash": "0bcf75240391d8e73b84607bbae988b1",
+    "semantic_hash": "0bcf75240391d8e73b84607bbae988b1"
+  },
+  "assets/viste-anagrafiche.js": {
+    "mtime": 1794346105.9948263,
+    "seen": 1794350919.2123027,
+    "ast_hash": "6e52002b2ffb270d2dae1553dffdc9b8",
+    "semantic_hash": "6e52002b2ffb270d2dae1553dffdc9b8"
+  },
+  "assets/viste-attivita.js": {
+    "mtime": 1794342778.5550365,
+    "seen": 1794350919.212304,
+    "ast_hash": "1bcfc0433bcd202fe08a1769a1933b62",
+    "semantic_hash": "1bcfc0433bcd202fe08a1769a1933b62"
+  },
+  "assets/viste-clinica.js": {
+    "mtime": 1794346114.1886928,
+    "seen": 1794350919.2123053,
+    "ast_hash": "0de869694fdf38aba3968fab780724af",
+    "semantic_hash": "0de869694fdf38aba3968fab780724af"
+  },
+  "assets/viste-core.js": {
+    "mtime": 1794345069.7033775,
+    "seen": 1794350919.2123067,
+    "ast_hash": "34ab88c462169e219185ff691ac6a244",
+    "semantic_hash": "34ab88c462169e219185ff691ac6a244"
+  },
+  "assets/viste-economia.js": {
+    "mtime": 1794346071.3646007,
+    "seen": 1794350919.2123077,
+    "ast_hash": "a2483327ec502d2fd26b267572bbc43b",
+    "semantic_hash": "a2483327ec502d2fd26b267572bbc43b"
+  },
+  "assets/viste-report.js": {
+    "mtime": 1794327703.4803295,
+    "seen": 1794350919.212309,
+    "ast_hash": "8a2fcd1f396d6f87695b140ffa0eeea0",
+    "semantic_hash": "8a2fcd1f396d6f87695b140ffa0eeea0"
+  },
+  "assets/viste-ruoli.js": {
+    "mtime": 1794345675.0500684,
+    "seen": 1794350919.2123108,
+    "ast_hash": "8566e3008e5cb59bc7d2213e35b13eaa",
+    "semantic_hash": "8566e3008e5cb59bc7d2213e35b13eaa"
+  },
+  "sw.js": {
+    "mtime": 1794348322.9904938,
+    "seen": 1794350919.2123117,
+    "ast_hash": "69a79bc4690321d90840e42413e29757",
+    "semantic_hash": "69a79bc4690321d90840e42413e29757"
+  }
+}
